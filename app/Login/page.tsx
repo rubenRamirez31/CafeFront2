@@ -1,5 +1,5 @@
 'use client'
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
@@ -22,8 +22,13 @@ import {
 
 const LoginPage = () => {
     const [errors, SetError] = useState<string>("");
+    const { data: session, status } = useSession();
     const { handleSubmit, register } = useForm<ILogin>();
     const router = useRouter();
+
+    if (status === 'authenticated') {
+        router.push('..');
+    }
 
     const onSubmit = handleSubmit(async (formData, event) => {
         event?.preventDefault();
