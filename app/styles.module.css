@@ -1,0 +1,298 @@
+
+.btnprincipal {
+    background-color: white;
+    color: #553600;
+    border-radius: 0.25rem;;
+    border: 1px solid ;
+    padding: 0.5rem 1rem;
+    transition: ease-out 200ms;
+}
+
+.btnprincipal:hover {
+    transition: ease-in-out 200ms;
+    background-color: #553600;
+    color: white;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,500&display=swap');
+
+.principal{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+ 
+}
+
+.container{
+    max-width: 1200px;
+    margin:  0 auto;
+}
+
+.header {
+    
+   
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)),
+      url('/bg.jpg');
+    background-position: center bottom;  
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+   
+  }
+  .logo{
+    color: #fffdfc;
+    font-size: 25px;
+    font-weight: 800;
+  }
+
+  .headerContent{
+    
+    text-align: center;
+  }
+
+  .headerContent h1{
+    font-size: 75px;
+    line-height: 80px;
+    color: #f9fafc;
+    text-transform:  uppercase;
+    margin-bottom: 35px;
+  }
+
+  .headerContent p{
+    font-size: 16px;
+    color: #c5c5c5;
+    padding: 0 250px;
+    margin-bottom:  25px;
+  }
+
+  .btnt1{
+    display:  inline-block;
+    padding: 13px 35px;
+    background-color: #ce967b;
+    color: #f9fafc;
+    text-transform: uppercase;
+  }
+
+  .btnt1:hover{
+    background-color: #ebadbd;
+  }
+
+.coffee{
+    padding: 100px 0;
+    background-color: #e1e2e6;
+    position: relative;
+
+}
+
+.coffeeContent{
+    text-align: center;
+}
+
+.coffeeContent h2{
+    font-size:  55px;
+    line-height:  70px;
+    color: #323337;
+    text-transform: uppercase;
+    padding: 0 250px;
+    margin-bottom: 15px;
+
+}
+
+.txtP{
+    font-size: 16;
+    color: #414247;
+    padding: 0 250px;
+    margin-bottom: 35px;
+}
+
+.coffeeGroup{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+}
+
+.coffee1 img{
+    padding: 0 25pxpx;
+
+}
+.coffee1 img{
+    width: 200px;
+
+}
+
+.coffeeImg{
+    position:  absolute;
+    top: 0;
+    right: 0;
+}
+
+.coffee1 h3{
+    color: #323337;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.searchButton {
+
+    font-family: 'Poppins', sans-serif;
+    background-color: red;
+}
+
+.services{
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)),
+        url('/bg2.jpg');
+    background-repeat: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 100px 0;
+}
+
+.servicesContent{
+    text-align: center;
+
+}
+
+.servicesContent h2{
+    font-size: 55px;
+    line-height: 70px;
+    color: #f9fafc;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+.servicesContent p{
+    font-size: 16px;
+    color: #c5c5c5;
+    margin-bottom: 50px;
+    padding: 0 100px;
+}
+
+.servicesGroup{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
+.services1{
+    padding:  0 100px;
+}
+
+.services1 img{
+    width:  25px;
+    margin-bottom: 15px;
+}
+
+.services1 h3{
+    color: #eaccb3;
+    font-size: 18px;
+
+}
+
+.general{
+
+display: flex;
+
+}
+
+.general1{
+    width:  50%;
+    padding: 100px 250px 100px 100px;
+    background-color: #e1e2e6;
+
+}
+
+.general2{
+    background-image: url('/coffe-1.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+}
+
+.general3{
+    background-image: url('/coffee-2.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+}
+
+.h2{
+    font-size: 55px;
+    line-height: 70;
+    color: #323337;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.p{
+    font-size: 16px;
+    color: #414247;
+    margin: 25px 0 45px 0;
+}
+
+.blog{
+    padding: 100px0;
+    text-align: center;
+}
+
+.blogContent{
+    display: flex;
+    justify-content: space-around;
+}
+
+.blog1{
+    padding: 15px 55px;
+}
+
+.blog1 img{
+    width: 250px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.blog1 h3{
+    font-size: 25px;
+    color:#323337
+}
+
+
+.Productos{
+    text-align: center;
+    background-color: #414247;
+    padding: 100px0;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+/* styles.module.css */
+
+.navbar {
+    background-color: transparent !important; /* Hace que el fondo sea transparente */
+    border: none; /* Elimina el borde */
+    transition: background-color 0.5s; /* Agrega una transición suave para el cambio de fondo */
+  }
+  
+  .navbar-brand,
+  .navbar-nav .nav-link {
+    color: rgb(0, 0, 0); /* Cambia el color del texto a blanco */
+  }
+  
+  /* Estilos adicionales para resaltar el enlace activo, si es necesario */
+  .navbar-nav .nav-item.active .nav-link {
+    color: #000000; /* Cambia el color del texto del enlace activo */
+  }
+  
+  /* Puedes ajustar y agregar más estilos según tus necesidades */
+  
