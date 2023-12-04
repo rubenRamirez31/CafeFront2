@@ -21,8 +21,6 @@ const NavBarComponent = () => {
     setIsLoginPage(window.location.pathname === '/Login');
   }, []);
 
-  console.log(session?.user);
-
   if (status === 'authenticated') {
 
     switch (session?.user.rol.idRol) {
