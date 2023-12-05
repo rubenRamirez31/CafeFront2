@@ -3,22 +3,47 @@ import L, { Icon, LatLngExpression } from 'leaflet'
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import MarkerIcon from '../../node_modules/leaflet/dist/images/marker-icon.png'
 import 'leaflet/dist/leaflet.css'
+import { ITienda } from "../models/ITienda";
+import { useSession, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
+import MapaComponent from '../components/MapaComponent';
+
+
 const TiendasPage = () => {
-  const coordenadasTec = [19.882814, -97.3930258] as LatLngExpression
+  const { data: session, status } = useSession();
+  const [tiendas, setTiendas] = useState<ITienda[]>([]);
+
+
+  useEffect(() => {
+    if (session?.user.token) {
+      // Obtener tiendas
+      fetch('http://localhost:8080/tiendas', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.user.token}`,
+        },
+      })
+        .then(response => response.json())
+        .then(json => setTiendas(json))
+        .catch(error => console.error('Error fetching stores:', error));
+    }
+  }, [session]);
+  
+  if (status === 'loading') {
+    return <p>Loading...</p>;
+  }
+
+  
+
+
   return(
-    <MapContainer style={{width : '100vw', height: '100vh'}}
-     center={ coordenadasTec} zoom={13} scrollWheelZoom={false}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={coordenadasTec}
-      icon={new Icon({iconUrl: MarkerIcon.src, iconSize: [25, 41], iconAnchor: [12, 41]})}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-    </MapContainer>
+
+    <div>
+    <h1>Tiendas</h1>
+    <MapaComponent tiendas={tiendas} />
+  </div>
+
   )
 }
 
