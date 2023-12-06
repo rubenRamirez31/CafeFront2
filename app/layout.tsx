@@ -24,7 +24,7 @@ export default function RootLayout({
       <body>
         <SessionContextGlobal>
           <NavBarComponent></NavBarComponent>
-          <div className="container">
+          <div>
             {children}
           </div>
         </SessionContextGlobal>

@@ -2,26 +2,24 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import ProductosCard from '../components/ProductosCard';
-import { IProducto } from '../models/IProducto';
-
+import { IStockProducto } from '../models/IStockProducto'; // Importa el modelo IStockProducto
 const Categorias = () => {
   const { data: session, status } = useSession();
-  const [productos, setProductos] = useState<IProducto[]>([]);
+  const [stockProductos, setStockProductos] = useState<IStockProducto[]>([]); // Cambia el estado y el tipo a IStockProducto
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
   const [busqueda, setBusqueda] = useState<string>('');
 
   useEffect(() => {
     if (session?.user.token) {
-      fetch('http://localhost:8080/Productos', {
+      fetch('http://localhost:8080/stock-productos', { // Cambia la URL
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          
         },
       })
         .then((response) => response.json())
-        .then((json) => setProductos(json))
-        .catch((error) => console.error('Error fetching products:', error));
+        .then((json) => setStockProductos(json))
+        .catch((error) => console.error('Error fetching stock products:', error));
     }
   }, [session]);
 
@@ -33,13 +31,13 @@ const Categorias = () => {
     setBusqueda(e.target.value);
   };
 
-  const productosFiltrados = productos.filter(
-    (producto) =>
-      (categoriaSeleccionada === '' || producto.categoria?.nombre === categoriaSeleccionada) &&
+  const productosFiltrados = stockProductos.filter( // Cambia 'productos' a 'stockProductos'
+    (stockProducto) =>
+      (categoriaSeleccionada === '' || stockProducto.producto.categoria?.nombre === categoriaSeleccionada) &&
       (busqueda === '' ||
-        producto.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-        (producto.categoria?.nombre &&
-          producto.categoria.nombre.toLowerCase().includes(busqueda.toLowerCase()))
+        stockProducto.producto.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        (stockProducto.producto.categoria?.nombre &&
+          stockProducto.producto.categoria.nombre.toLowerCase().includes(busqueda.toLowerCase()))
       )
   );
 
@@ -65,8 +63,8 @@ const Categorias = () => {
       </div>
 
       <div className="row">
-        {productosFiltrados.map((producto) => (
-          <ProductosCard key={producto.idProducto} producto={producto} />
+        {productosFiltrados.map((stockProducto) => (
+          <ProductosCard key={stockProducto.idStockProducto} stockProducto={stockProducto} />
         ))}
       </div>
     </>

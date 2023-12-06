@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,500&display=swap');
+
 .btnprincipal {
     background-color: white;
     color: #553600;
@@ -16,7 +18,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,500&display=swap');
 
-.principal {
+.principal{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -267,41 +269,32 @@
 }
 
 
-.Productos {
+.Productos{
     text-align: center;
     background-color: #414247;
     padding: 100px0;
     display: flex;
     justify-content: space-around;
-
+    
 }
 
 /* styles.module.css */
 
 .navbar {
-    background-color: transparent !important;
-    /* Hace que el fondo sea transparente */
-    border: none;
-    /* Elimina el borde */
-    transition: background-color 0.5s;
-    /* Agrega una transición suave para el cambio de fondo */
-}
-
-.navbar-brand,
-.navbar-nav .nav-link {
-    color: rgb(0, 0, 0);
-    /* Cambia el color del texto a blanco */
-}
-
-/* Estilos adicionales para resaltar el enlace activo, si es necesario */
-.navbar-nav .nav-item.active .nav-link {
-    color: #000000;
-    /* Cambia el color del texto del enlace activo */
-}
-
-/* Puedes ajustar y agregar más estilos según tus necesidades */
-
-.contenedorTyC {
-    width: 50%;
-    margin: 0 auto;
-}
+    background-color: transparent !important; /* Hace que el fondo sea transparente */
+    border: none; /* Elimina el borde */
+    transition: background-color 0.5s; /* Agrega una transición suave para el cambio de fondo */
+  }
+  
+  .navbar-brand,
+  .navbar-nav .nav-link {
+    color: rgb(0, 0, 0); /* Cambia el color del texto a blanco */
+  }
+  
+  /* Estilos adicionales para resaltar el enlace activo, si es necesario */
+  .navbar-nav .nav-item.active .nav-link {
+    color: #000000; /* Cambia el color del texto del enlace activo */
+  }
+  
+  /* Puedes ajustar y agregar más estilos según tus necesidades */
+  

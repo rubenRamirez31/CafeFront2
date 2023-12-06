@@ -4,30 +4,54 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import ProductosCard from "./components/ProductosCard";
 import { IProducto } from "./models/IProducto";
+import { IStockProducto } from "./models/IStockProducto";
 import { useSession } from "next-auth/react";
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
 export const PrincipalPage = () => {
 
-  
+
   const { data: session, status } = useSession();
-  const [productos, setProductos] = useState<IProducto[]>([]);
+  const [stockProductos, setStockProductos] = useState<IStockProducto[]>([]);
+  const [busqueda, setBusqueda] = useState<string>('');
+  const [carrito, setCarrito] = useState<IStockProducto[]>([]);
+
   useEffect(() => {
 
     if (session?.user.token) {
-      fetch('http://localhost:8080/Productos', {
+      fetch('http://localhost:8080/stock-productos', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.user.token}`,
+          
         },
       })
         .then(response => response.json())
-        .then(json => setProductos(json))
+        .then(json => setStockProductos(json))
         .catch(error => console.error('Error fetching products:', error));
     }
 
 
   }, [session]);
+
+  const handleBusquedaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBusqueda(e.target.value);
+  };
+
+  const agregarAlCarrito = (idStockProducto: number) => {
+    const productoSeleccionado = stockProductos.find(p => p.idStockProducto === idStockProducto);
+    if (productoSeleccionado) {
+      setCarrito(prevCarrito => [...prevCarrito, productoSeleccionado]);
+    }
+  };
+
+  const productosFiltrados = stockProductos.filter(
+    stockProducto =>
+      stockProducto.producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
 
 
   return (
@@ -97,50 +121,65 @@ export const PrincipalPage = () => {
 
       <main className={styles.services}>
 
-      <div  className={styles.servicesContent}>
-      <h2>Productos</h2>
-        <div className={styles.servicesGroup}>
-          <div className={styles.services1}>
-            <img src="i1.svg" alt="" />
-            <h3>Servicio 1</h3>
+        <div className={styles.servicesContent}>
+          <h2>Productos</h2>
+          <div className={styles.servicesGroup}>
+            <div className={styles.services1}>
+              <img src="i1.svg" alt="" />
+              <h3>Rico</h3>
+            </div>
+            <div className={styles.services1}>
+              <img src="i2.svg" alt="" />
+              <h3>Delicioso</h3>
+            </div>
+            <div className={styles.services1}>
+              <img src="i3.svg" alt="" />
+              <h3>Agradable</h3>
+            </div>
           </div>
-          <div className={styles.services1}>
-            <img src="i2.svg" alt="" />
-            <h3>Servicio 2</h3>
-          </div>
-          <div className={styles.services1}>
-            <img src="i3.svg" alt="" />
-            <h3>Servicio 3</h3>
-          </div>
+
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, iusto.</p>
+          <Link href="./Informacion" className={styles.btnt1}>
+            Mas Informacion
+
+          </Link>
+          <p></p>
+
         </div>
 
-        
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, iusto.</p>
-        <Link href="./Informacion" className={styles.btnt1}>
-          Mas Informacion
 
-        </Link>
-        <p></p>
-        <input type="text" placeholder="Buscar productos..." className={styles.searchInput} />
-        <button className={styles.searchButton}>Buscar</button>
-      </div>
 
-      
-       
 
       </main>
 
-        {/* Productos Destacados */}
-        <h2>Productos Destacados</h2>
-        <section className={styles.Productos}>
-          
-          <div className="row">
-            {productos.map((producto: IProducto) => (
-              //condicionar aqui que se vean los productos con mas likes
-              <ProductosCard key={producto.idProducto} producto={producto} />
-            ))}
+      <section className={styles.Productos}>
+        <div>
+          <h1>Productos Disponibles</h1>
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            className={styles.searchInput}
+            value={busqueda}
+            onChange={handleBusquedaChange}
+          />
+          <button className={styles.searchButton}>Buscar</button>
+
+          <div className={styles.scrollContainer}>
+            <div className="row">
+            {productosFiltrados.map((stockProducto: IStockProducto) => (
+            <ProductosCard
+              key={stockProducto.idStockProducto}
+              stockProducto={stockProducto}
+              agregarAlCarrito={agregarAlCarrito}
+            />
+          ))}
+            </div>
+
           </div>
-        </section>
+
+        </div>
+      </section>
 
       <section className={styles.general}>
         <div className={styles.general1}>
@@ -203,5 +242,7 @@ export const PrincipalPage = () => {
         </Link>
       </section>
     </div>
+
+
   );
 };

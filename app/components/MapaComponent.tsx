@@ -1,11 +1,11 @@
 // components/MapaTiendas.tsx
-
 import React, { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import L, { Icon, LatLngExpression } from 'leaflet';
 import MarkerIcon from 'leaflet/dist/images/marker-icon.png';
 import 'leaflet/dist/leaflet.css';
 import { ITienda } from '../models/ITienda';
+import Link from 'next/link'; // Importa Link de next
 
 interface MapaTiendasProps {
   tiendas: ITienda[];
@@ -27,6 +27,10 @@ const MapaComponent: React.FC<MapaTiendasProps> = ({ tiendas }) => {
             <div>
               <h3>{tienda.nombre}</h3>
               <p>{tienda.descripcion}</p>
+            
+              <Link href={`/Tiendas/Ver?idTienda=${tienda.idTienda}`}>
+              Ir a la tienda
+              </Link>
             </div>
           </Popup>
         </Marker>
