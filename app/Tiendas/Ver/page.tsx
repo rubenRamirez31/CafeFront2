@@ -1,33 +1,24 @@
-'use client'
 // pages/Tiendas/Ver/[idTienda].tsx
-import Link from "next/link";
+"use client"
+// pages/Tiendas/Ver/[idTienda].tsx
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { IStockProducto } from '../../models/IStockProducto';
-import { ICarrito } from "@/app/models/ICarrito";
+import { ICarrito } from "../../models/ICarrito";
 import ProductosCard from '../../components/ProductosCard';
-import { useRouter } from 'next/router';
 import styles from "../../styles.module.css";
-import { Session } from "next-auth";
+
 const TiendaVerPage = () => {
-
   const { data: session, status } = useSession();
-
-  const [carrito, setCarrito] = useState<ICarrito[]>([]);
+  const [carrito, setCarrito] = useState<ICarrito>({ idCarrito: 0, idUsuario: 0, productos: [] });
   const [productosTienda, setProductosTienda] = useState<IStockProducto[]>([]);
   const [busqueda, setBusqueda] = useState<string>('');
-  //const router = useRouter();
 
-  ;
-  //const { idTienda } = router.query;
   useEffect(() => {
     if (session?.user.token) {
-
-      // const idTienda = router.query.idTienda; // Obtén el idTiend
-
       const urlParams = new URLSearchParams(window.location.search);
       const idTiendaFromUrl = urlParams.get('idTienda');
-      // Obtener productos de la tienda
+
       fetch(`http://localhost:8080/stock-productos/tienda/${idTiendaFromUrl}`, {
         method: 'GET',
         headers: {
@@ -45,40 +36,60 @@ const TiendaVerPage = () => {
     return <p>Loading...</p>;
   }
 
-  const agregarAlCarrito = async (idStockProducto: IStockProducto) => {
+  const agregarAlCarrito = async (idStockProducto: number) => {
     try {
-      const carritoActivo = carrito ; // Asegúrate de que carritos esté disponible
       if (!session?.user?.token) {
-        console.error('token de sesión no disponible');
+        console.error('Token de sesión no disponible');
         return;
       }
-  
-      const response = await fetch('http://localhost:8080/productos-carrito', {
+
+      // Obtener el carrito actual del usuario
+      const carritoResponse = await fetch(`http://localhost:8080/carritos/usuario/${session.user.idUsuario}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.user.token}`,
+        },
+      });
+
+      if (!carritoResponse.ok) {
+        console.error('Error al obtener el carrito del usuario:', carritoResponse.statusText);
+        return;
+      }
+
+      const listaCarritos = await carritoResponse.json();
+      const carritoActual = listaCarritos[0];
+
+      // Preparar la solicitud para agregar al carrito
+      const carritoProductoData = {
+        carrito: {
+          idCarrito: carritoActual.idCarrito,
+        },
+        producto: {
+          idProducto: idStockProducto,
+        },
+      };
+
+      const response = await fetch('http://localhost:8080/carrito-productos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${session.user.token}`,
         },
-        body: JSON.stringify({
-          
-          cantidad: 1,
-          idProducto: idStockProducto.idStockProducto,
-          carrito: null,
-          idProductoCarrito: 1,
-        }),
+        body: JSON.stringify(carritoProductoData),
       });
-  
+
       if (response.ok) {
         console.log('Producto agregado al carrito con éxito');
-        // Actualiza el estado de carrito en tu aplicación
+        // Actualiza el estado de carrito en tu aplicación si es necesario
       } else {
-        console.error('Error al agregar producto al carrito:', response.statusText);
+        console.error('Error al agregar producto al carritoo:', carritoActual.idCarrito);
       }
     } catch (error) {
-      console.error('Error al agregar producto al carrito:');
+      console.error('Error al agregar producto al carrito:', error);
     }
   };
-  
+
   const handleBusquedaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBusqueda(e.target.value);
   };
@@ -87,12 +98,6 @@ const TiendaVerPage = () => {
     stockProducto =>
       stockProducto.producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
-  const seleccionarCarritoActivo = (carritos: ICarrito[] = []): ICarrito => {
-    return carritos[1] || {} as ICarrito; // Si no hay carritos, se devuelve un objeto vacío como valor predeterminado
-  };
-  
-
-  const carritoActivo: ICarrito = seleccionarCarritoActivo(carrito);
 
   return (
     <section className={styles.Productos}>
@@ -113,7 +118,7 @@ const TiendaVerPage = () => {
               <ProductosCard
                 key={stockProducto.idStockProducto}
                 stockProducto={stockProducto}
-                agregarAlCarrito={() => agregarAlCarrito(stockProducto)}
+                agregarAlCarrito={() => agregarAlCarrito(stockProducto.producto.idProducto)}
               />
             ))}
           </div>
