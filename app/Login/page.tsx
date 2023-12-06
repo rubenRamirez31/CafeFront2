@@ -85,6 +85,8 @@ const LoginPage = () => {
 
                                 <p className="mb-5 pb-lg-2 my-3" style={{ color: '#553600' }}>¿No tiene una cuenta? <a href="/Registrar" style={{ color: '#393f81' }}>Pulsa aquí</a></p>
 
+                                    <Link href={'/RegistroVendedor'} style={{ width: '100%', textDecoration:'none', textAlign:'center' }} className={styles.btnprincipal}>Trabaja con nosotros</Link>
+                              
                             </MDBCardBody>
                         </MDBCol>
                     </MDBRow>

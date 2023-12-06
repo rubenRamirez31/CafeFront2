@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,500&display=swap');
 
-
 .btnprincipal {
     background-color: white;
     color: #553600;
-    border-radius: 0.25rem;
-    ;
+    border-radius: 0.40rem;
     border: 1px solid;
     padding: 0.5rem 1rem;
     transition: ease-out 200ms;
@@ -17,7 +15,9 @@
     color: white;
 }
 
-.principal {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,500&display=swap');
+
+.principal{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -268,129 +268,36 @@
 }
 
 
-.Productos {
+.Productos{
+    text-align: center;
+    background-color: #414247;
+    padding: 100px0;
     display: flex;
     justify-content: space-around;
-
-    background-color: rgb(138, 97, 0);
-    padding: 100px0;
-
-
-
+    
 }
 
-/* Puedes ajustar y agregar más estilos según tus necesidades */
-@media (max-width:991px) {
+/* styles.module.css */
 
-    .header {
-        min-height: 0vh;
-    }
-
-    .headerContent {
-        padding: 100px 30px;
-    }
-
-    .headerContent P {
-        padding: 0;
-    }
-
-    .coffee {
-        padding: 30px;
-    }
-
-    .coffeeContent h2 {
-        padding: 0;
-    }
-
-    .txtP {
-        padding: 0;
-    }
-
-    .coffeeGroup {
-        flex-direction: column;
-        margin-bottom: 0;
-    }
-
-    .coffeeImg {
-        display: none;
-    }
-
-    .services {
-        padding: 30px;
-    }
-
-    .servicesContent P {
-        padding: 0;
-    }
-
-    .servicesGroup{
-        flex-direction: column;
-        margin-bottom: 0;
-    }
-    .services1{
-        margin-bottom: 25;
-
-    }
-
-    .general{
-        flex-direction: column;
-    }
-
-    .general1{
-        width: 100%;
-        padding: 30px;
-        text-align: center;
-    }
-    .general2 .general3{
-        display:  none;
-    }
-
-    .blog{
-        padding: 30px;
-    }
-
-    .blogContent{
-        flex-direction: column;
-    }
-
-    .blog1{
-        padding: 0;
-    }
-
-    /* para transiciones */
-.fade-enter {
-    opacity: 0.01;
+.navbar {
+    background-color: transparent !important; /* Hace que el fondo sea transparente */
+    border: none; /* Elimina el borde */
+    transition: background-color 0.5s; /* Agrega una transición suave para el cambio de fondo */
   }
   
-  .fade-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
+  .navbar-brand,
+  .navbar-nav .nav-link {
+    color: rgb(0, 0, 0); /* Cambia el color del texto a blanco */
   }
   
-  .fade-exit {
-    opacity: 1;
+  /* Estilos adicionales para resaltar el enlace activo, si es necesario */
+  .navbar-nav .nav-item.active .nav-link {
+    color: #000000; /* Cambia el color del texto del enlace activo */
   }
   
-  .fade-exit-active {
-    opacity: 0.01;
-    transition: opacity 500ms ease-in;
-  }
+  /* Puedes ajustar y agregar más estilos según tus necesidades */
   
-
-  /* ... Scroll */
-
-.scrollContainer {
-    overflow-x: auto;
-    white-space: nowrap;
-    height: 400px; /* ajusta la altura según tus preferencias */
-    margin-bottom: 200px; /* para dejar espacio entre el contenido y las barras de desplazamiento */
+  .contenedorTyC {
+    width: 50%;
+    margin: 0 auto;
   }
-  
-  .row {
-    display: inline-flex;
-  }
-
-     
-
-
-}

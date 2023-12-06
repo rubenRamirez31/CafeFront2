@@ -11,7 +11,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
+import Spinner from 'react-bootstrap/Spinner';
 
 const NavBarComponent = () => {
   const { data: session, status } = useSession();
@@ -20,6 +20,20 @@ const NavBarComponent = () => {
   useEffect(() => {
     setIsLoginPage(window.location.pathname === '/Login');
   }, []);
+
+  if (status === 'loading') {
+    return (
+      <>
+      <div className="d-flex justify-content-center">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+        
+      </>
+    )
+
+  }
 
   if (status === 'authenticated') {
 
@@ -45,7 +59,7 @@ const NavBarComponent = () => {
                     <Offcanvas.Body>
                       <Nav className="justify-content-start flex-grow-1 pe-3">
                         <Nav.Link href="/">Usuarios</Nav.Link>
-                        <Nav.Link href="#">Solicitudes</Nav.Link>
+                        <Nav.Link href="/Admin/Admin/Solicitudes">Solicitudes</Nav.Link>
                       </Nav>
                       <Nav className="justify-content-end">
                         {session ? (
@@ -88,9 +102,9 @@ const NavBarComponent = () => {
                     </Offcanvas.Header>
                     <Offcanvas.Body>
                       <Nav className="justify-content-start flex-grow-1 pe-3">
-                        <Nav.Link href="/">Mis Productos</Nav.Link>
-                        <Nav.Link href="#">Mis Tiendas</Nav.Link>
-                        <Nav.Link href="#">Ventas</Nav.Link>
+                        <Nav.Link href="/Admin/Vendedor/Productos">Mis Productos</Nav.Link>
+                        <Nav.Link href="/Admin/Vendedor/Tiendas">Mis Tiendas</Nav.Link>
+                        <Nav.Link href="/Admin/Vendedor/Ventas">Ventas</Nav.Link>
                       </Nav>
                       <Nav className="justify-content-end">
                         {session ? (
@@ -205,6 +219,7 @@ const NavBarComponent = () => {
         )
         break;
       default:
+        
         break;
     }
   } else {
