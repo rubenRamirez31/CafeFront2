@@ -45,7 +45,7 @@ const NavBarComponent = () => {
                     <Offcanvas.Body>
                       <Nav className="justify-content-start flex-grow-1 pe-3">
                         <Nav.Link href="/">Usuarios</Nav.Link>
-                        <Nav.Link href="#">Solicitudes</Nav.Link>
+                        <Nav.Link href="/Admin/Admin/Solicitudes">Solicitudes</Nav.Link>
                       </Nav>
                       <Nav className="justify-content-end">
                         {session ? (

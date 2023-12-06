@@ -202,13 +202,6 @@ export const PrincipalPage = () => {
 
         </Link>
       </section>
-
-
-
-
-
     </div>
-
-    
   );
 };
