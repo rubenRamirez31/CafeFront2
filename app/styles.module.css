@@ -3,8 +3,7 @@
 .btnprincipal {
     background-color: white;
     color: #553600;
-    border-radius: 0.25rem;
-    ;
+    border-radius: 0.40rem;
     border: 1px solid;
     padding: 0.5rem 1rem;
     transition: ease-out 200ms;
@@ -298,3 +297,7 @@
   
   /* Puedes ajustar y agregar más estilos según tus necesidades */
   
+  .contenedorTyC {
+    width: 50%;
+    margin: 0 auto;
+  }

@@ -5,7 +5,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Link from 'next/link';
 import styles from '../../../styles.module.css'
 
-const VendedorProductosPage = () => {
+const Ventaspage = () => {
     const { data: session } = useSession();
     const [error, setError] = useState('');
     const [mostrarError, setMostrarError] = useState(false);
@@ -78,4 +78,4 @@ const VendedorProductosPage = () => {
     }
 };
 
-export default VendedorProductosPage;
+export default Ventaspage;

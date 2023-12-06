@@ -4,9 +4,17 @@ import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
 import { useSession } from "next-auth/react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from 'react-bootstrap/Form';
 
 
 export const TyCPage = () => {
+    // Estado para manejar si el checkbox está marcado o no
+    const [isChecked, setIsChecked] = useState(false);
+
+    // Función para actualizar el estado cuando el checkbox cambia
+    const handleCheckboxChange = (event: any) => {
+        setIsChecked(event.target.checked);
+    };
 
 
     return (
@@ -60,6 +68,25 @@ export const TyCPage = () => {
                         <h2>Limitación de Responsabilidad:</h2>
                         <p className="text text-justify">Toda la informacion presentada en la plataforma es directamente responsabilidad de los vendedores, errores de precio,descripcion, stock, direciones y ubicaciones, son unica y exclusivamente respoinsabilidades de los vendedores</p>
                     </section>
+
+                    <div>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="aceptarTyC" onChange={handleCheckboxChange} />
+                            <label className="form-check-label" htmlFor="aceptarTyC">Acepto los términos y condiciones</label>
+                        </div>
+                        <div className="my-3 d-flex justify-content-end">
+                            {isChecked ? (
+                                <>
+                                    <Link style={{ textDecoration: 'none' }} className={styles.btnprincipal} href={'/RegistroVendedor/Formulario'} >Continuar</Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link style={{ textDecoration: 'none' }} className={styles.btnprincipal} href={'#'} aria-disabled >Acepta los terminos y condiciones</Link>
+                                </>
+                            )}
+
+                        </div>
+                    </div>
                 </div>
 
             </div>

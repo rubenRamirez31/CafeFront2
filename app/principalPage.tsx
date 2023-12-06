@@ -25,7 +25,6 @@ export const PrincipalPage = () => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${session.user.token}`,
-          
         },
       })
         .then(response => response.json())
@@ -51,8 +50,6 @@ export const PrincipalPage = () => {
     stockProducto =>
       stockProducto.producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
-
-
 
   return (
 
