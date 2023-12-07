@@ -321,6 +321,11 @@
     margin: 0 auto;
 }
 
+.contenedorDatosSolicitud {
+    width: 70%;
+    margin: 0 auto;
+}
+
 .contenedorSolicitudes {
     width: 80%;
     margin: 0 auto;
