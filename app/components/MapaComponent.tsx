@@ -15,7 +15,7 @@ const MapaComponent: React.FC<MapaTiendasProps> = ({ tiendas }) => {
   const coordenadasTec = [19.882814, -97.3930258] as LatLngExpression;
 
   return (
-    <MapContainer style={{ width: '50vw', height: '50vh' }} center={coordenadasTec} zoom={13} scrollWheelZoom={false}>
+    <MapContainer style={{ width: '100vw', height: '50vh' }} center={coordenadasTec} zoom={13} scrollWheelZoom={false}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

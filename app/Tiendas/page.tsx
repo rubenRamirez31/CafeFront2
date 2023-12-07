@@ -7,6 +7,7 @@ import { ITienda } from "../models/ITienda";
 import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import MapaComponent from '../components/MapaComponent';
+import styles from "../styles.module.css";
 
 
 const TiendasPage = () => {
@@ -29,20 +30,27 @@ const TiendasPage = () => {
         .catch(error => console.error('Error fetching stores:', error));
     }
   }, [session]);
-  
+
   if (status === 'loading') {
     return <p>Loading...</p>;
   }
 
-  
 
 
-  return(
 
-    <div>
-    <h1>Tiendas</h1>
-    <MapaComponent tiendas={tiendas} />
-  </div>
+  return (
+    
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1>Tiendas</h1>
+          <MapaComponent tiendas={tiendas} />
+        </div>
+
+
+      </header>
+ 
+
+
 
   )
 }

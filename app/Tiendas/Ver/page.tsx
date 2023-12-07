@@ -7,6 +7,7 @@ import { IStockProducto } from '../../models/IStockProducto';
 import { ICarrito } from "../../models/ICarrito";
 import ProductosCard from '../../components/ProductosCard';
 import styles from "../../styles.module.css";
+import Swal from 'sweetalert2';
 
 const TiendaVerPage = () => {
   const { data: session, status } = useSession();
@@ -80,7 +81,12 @@ const TiendaVerPage = () => {
       });
 
       if (response.ok) {
-        console.log('Producto agregado al carrito con éxito');
+        Swal.fire({
+          title: "¡Genial!",
+          text: "Producto agregado al carrito",
+          icon: "success",
+      });
+        console.log('Producto agregado al carrito con éxito', carritoActual.idCarrito);
         // Actualiza el estado de carrito en tu aplicación si es necesario
       } else {
         console.error('Error al agregar producto al carritoo:', carritoActual.idCarrito);

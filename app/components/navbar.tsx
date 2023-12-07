@@ -16,20 +16,51 @@ import Spinner from 'react-bootstrap/Spinner';
 const NavBarComponent = () => {
   const { data: session, status } = useSession();
   const [isLoginPage, setIsLoginPage] = useState(false);
+  const [cantidadCarrito, setCantidadCarrito] = useState(0);
+  const [loadingCantidadCarrito, setLoadingCantidadCarrito] = useState(false);
+
 
   useEffect(() => {
     setIsLoginPage(window.location.pathname === '/Login');
-  }, []);
+
+    const fetchCantidadCarrito = async () => {
+      try {
+        setLoadingCantidadCarrito(true);
+        const response = await fetch(`http://localhost:8080/carrito-productos/usuario/${session.user.idUsuario}/conteo`, {
+          method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.user.token}`,
+        },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setCantidadCarrito(data);
+        } else {
+          console.error('Error fetching carrito cantidad:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching carrito cantidad:', error);
+      } finally {
+        setLoadingCantidadCarrito(false);
+      }
+    };
+
+    if (session?.user?.token) {
+      fetchCantidadCarrito();
+    }
+  }, [session]);
 
   if (status === 'loading') {
     return (
       <>
-      <div className="d-flex justify-content-center">
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      </div>
-        
+        <div className="d-flex justify-content-center">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+
       </>
     )
 
@@ -152,7 +183,16 @@ const NavBarComponent = () => {
                         <Nav.Link href="#">Productos</Nav.Link>
                         <Nav.Link href="#">Tiendas</Nav.Link>
                         <Nav.Link href="#">Ordenes</Nav.Link>
-                        <Nav.Link href="#">Carrito</Nav.Link>
+                        <Navbar.Brand href="../MiCarrito">
+                          <img
+                            src="/carrito.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="C"
+                          />
+                          ({cantidadCarrito})
+                        </Navbar.Brand>
                       </Nav>
                       <Nav className="justify-content-end">
                         {session ? (
@@ -219,10 +259,15 @@ const NavBarComponent = () => {
         )
         break;
       default:
-        
+
         break;
     }
+
+
   } else {
+
+
+
     return (
       <>
         {(
@@ -248,6 +293,7 @@ const NavBarComponent = () => {
                         <Nav.Link href="#">Ordenes</Nav.Link>
                         <Nav.Link href="#">Pedidos</Nav.Link>
                         <Nav.Link href="/Tiendas">Tiendas</Nav.Link>
+
                       </>
                     ) : (
                       <>
