@@ -67,7 +67,6 @@ const VendedorProductospage = () => {
     }, [vendedor, session]);
 
 
-    
 
     // Aquí determinamos qué contenido renderizar
 

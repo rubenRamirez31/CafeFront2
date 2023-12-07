@@ -66,19 +66,20 @@ const VendedorTiendaspage = () => {
         }
     }, [vendedor, session]);
 
-
-    
-
     // Aquí determinamos qué contenido renderizar
-
-
-    if (!vendedor) {
+    if (vendedor === null) {
         return (
-            <div className='container-fluid' style={{ marginTop: '10rem', marginBottom: '10rem' }}>
-                <div className='d-flex justify-content-center'>
-                    <Spinner animation="border" />
+            <>
+                <div className="d-flex justify-content-center">
+                    <img src="/continuaturegistro.png" alt="Continuar registro" width={'30%'} height={'30%'} />
                 </div>
-            </div>
+                <div className="d-flex justify-content-center">
+                    <h3 className="text text-center">Aún no tienes acceso a este contenido, presiona el siguiente botón para continuar:</h3>
+                </div>
+                <div className="d-flex justify-content-center my-5">
+                    <Link href={'/RegistroVendedor/DatosSolicitud'} className={styles.btnprincipal} style={{ textDecoration: 'none' }}>Continuar Solicitud</Link>
+                </div>
+            </>
         );
     }
 
@@ -93,7 +94,7 @@ const VendedorTiendaspage = () => {
                     <h3 className="text text-center">Aún no tienes acceso a este contenido, presiona el siguiente botón para continuar:</h3>
                 </div>
                 <div className="d-flex justify-content-center my-5">
-                    <Link href={'/RegistroVendedor/DatosSolicitud'} className={styles.btnprincipal} style={{textDecoration:'none'}}>Continuar Solicitud</Link>
+                    <Link href={'/RegistroVendedor/DatosSolicitud'} className={styles.btnprincipal} style={{ textDecoration: 'none' }}>Continuar Solicitud</Link>
                 </div>
             </>
 
@@ -107,7 +108,6 @@ const VendedorTiendaspage = () => {
                 <div className="d-flex justify-content-center">
                     <p>Error: {error}</p>
                 </div>
-                {/* Aquí puedes agregar un botón o enlace para reintentar o manejar el error */}
             </div>
         );
     }
@@ -125,7 +125,7 @@ const VendedorTiendaspage = () => {
                         <h3 className="text text-center">Tu solicitud está pendiente, puedes consultar el estatus aquí:</h3>
                     </div>
                     <div className="d-flex justify-content-center my-5">
-                        <Link href={'/ruta-para-ver-estatus'} className={styles.btnprincipal} style={{textDecoration:'none'}} passHref>{solicitud.estatusSolicitud.estatus}</Link>
+                        <Link href={'/ruta-para-ver-estatus'} className={styles.btnprincipal} style={{ textDecoration: 'none' }} passHref>{solicitud.estatusSolicitud.estatus}</Link>
                     </div>
                 </>
             ) : (

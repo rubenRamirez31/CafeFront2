@@ -1,7 +1,7 @@
 import { IUsuario } from "./IUsuario";
 export interface IVendedor{
     idVendedor? : number; 
-    idUsuario: IUsuario;
+    usuario: IUsuario;
     razonSocial: string;
     imagenINE: string;
 }
