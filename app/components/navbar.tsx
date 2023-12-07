@@ -181,7 +181,7 @@ const NavBarComponent = () => {
                       <Nav className="justify-content-start flex-grow-1 pe-3">
                         <Nav.Link href="/">Inicio</Nav.Link>
                         <Nav.Link href="#">Productos</Nav.Link>
-                        <Nav.Link href="#">Tiendas</Nav.Link>
+                        <Nav.Link href="../Tiendas">Tiendas</Nav.Link>
                         <Nav.Link href="#">Ordenes</Nav.Link>
                         <Navbar.Brand href="../MiCarrito">
                           <img
