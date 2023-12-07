@@ -17,13 +17,27 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,500&display=swap');
 
-.principal {
+.principal  {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
 
+}
+
+.body {
+    margin: 0;
+    padding: 0;
+    background: rgb(255, 255, 255);
+}
+
+.container {
+    position: absolute;
+    left: 48%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
 }
 
 .container {
@@ -397,3 +411,135 @@
 }
 
 /*Fin-Cards*/
+
+@media (max-width:991px) {
+
+    .header {
+        min-height: 0vh;
+    }
+
+    .headerContent {
+        padding: 100px 30px;
+    }
+
+    .headerContent P {
+        padding: 0;
+    }
+
+    .coffee {
+        padding: 30px;
+    }
+
+    .coffeeContent h2 {
+        padding: 0;
+    }
+
+    .txtP {
+        padding: 0;
+    }
+
+    .coffeeGroup {
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    .coffeeImg {
+        display: none;
+    }
+
+    .services {
+        padding: 30px;
+    }
+
+    .servicesContent P {
+        padding: 0;
+    }
+
+    .servicesGroup {
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    .services1 {
+        margin-bottom: 25;
+
+    }
+
+    .general {
+        flex-direction: column;
+    }
+
+    .general1 {
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .general2 .general3 {
+        display: none;
+    }
+
+    .blog {
+        padding: 30px;
+    }
+
+    .blogContent {
+        flex-direction: column;
+    }
+
+    .blog1 {
+        padding: 0;
+    }
+}
+
+/*Estilos para tabla de carrito*/
+
+.carritoTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.carritoTable th,
+.carritoTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.carritoTable th {
+    background-color: #f2f2f2;
+}
+
+.carritoTable tfoot td {
+    font-weight: bold;
+}
+
+.carritoTable th button,
+.carritoTable td button {
+    padding: 5px 10px;
+    /* Ajusta el espacio interior del botón según sea necesario */
+    font-size: 14px;
+    /* Ajusta el tamaño del texto del botón según sea necesario */
+}
+
+.totalLabel {
+    text-align: right;
+    padding-right: 8px;
+}
+
+@media (max-width: 991px) {
+
+    .carritoTable th,
+    .carritoTable td {
+        padding: 0px;
+    }
+
+    .carritoTable tfoot td {
+        padding: 0px;
+    }
+
+    .totalLabel {
+        padding-right: 0px;
+    }
+}

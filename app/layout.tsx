@@ -4,6 +4,8 @@ import NavBarComponent from "./components/navbar"
 import FooterComponent from "./components/footer"
 import SessionContextGlobal from "./context/SessionContext"
 import { useSession, signOut } from "next-auth/react";
+import styles from "./styles.module.css";
+
 
 
 
@@ -21,7 +23,7 @@ export default function RootLayout({
   
   return (
     <html lang="es">
-      <body>
+      <body className={styles.body}>
         <SessionContextGlobal>
           <NavBarComponent></NavBarComponent>
           <div>
