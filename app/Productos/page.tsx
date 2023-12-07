@@ -40,7 +40,7 @@ const ProductosPage = () => {
 
       <div className="row">
         {productos.map((producto: IProducto) => (
-          <ProductosCard key={producto.idProducto} producto={producto} />
+          <ProductosCard key={producto.idProducto} />
         ))}
       </div>
     </>

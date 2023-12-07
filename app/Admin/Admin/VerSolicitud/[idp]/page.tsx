@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ISolicitud } from '../../../../models/ISolicitud'
 import styles from '../../../../styles.module.css'
 import { useSession } from 'next-auth/react'
+import Swal from 'sweetalert2'
 
 export interface Props {
     params: { idp: number }
@@ -13,6 +14,22 @@ const VerSolicitudpage = ({ params }: Props) => {
     const { data: session, status } = useSession();
     const [error, setError] = useState('');
     const [solicitud, setSolicitud] = useState<ISolicitud[]>([]);
+
+    const handleAcceptClick = () => {
+        Swal.fire({
+            title: "Respuesta enviada",
+            text: "Aceptaste esta solicitud",
+            icon: "success"
+        });
+    };
+
+    const handleRejectClick = () => {
+        Swal.fire({
+            title: "Respuesta enviada",
+            text: "Tendra que enviar los motivos al correo electronico proporcionado por el solicitante",
+            icon: "warning"
+        });
+    };
 
 
     useEffect(() => {
@@ -69,7 +86,7 @@ const VerSolicitudpage = ({ params }: Props) => {
                         <div className=' col-6 d-flex justify-content-center '>
                             <img src="/cafeNegocio.png" alt="imagen producto negocio" width={'350px'} height={'350px'} />
                         </div>
-                        <div className=' col-6'>
+                        <div className='col-6'>
                             <h5 style={{ fontWeight: 'bold' }}>¿Cuál es el nombre de tu negocio de café?: <span style={{ fontWeight: 'normal' }}> <br /> R = {solicitud.p1}</span></h5>
                             <h5 style={{ fontWeight: 'bold' }}>¿Cuéntame un poco sobre la historia o el origen de tu negocio?: <span style={{ fontWeight: 'normal' }}><br /> R = {solicitud.p2}</span></h5>
                             <h5 style={{ fontWeight: 'bold' }}>¿Qué tipo de café o granos utilizas en tu negocio? ¿Son de origen local o importados?: <span style={{ fontWeight: 'normal' }}> <br /> R = {solicitud.p3}</span></h5>
@@ -78,9 +95,10 @@ const VerSolicitudpage = ({ params }: Props) => {
                     </div>
 
                     <div className='d-flex justify-content-end'>
-                            <div className=''>
-
-                            </div>
+                        <div className='d-flex'>
+                            <button style={{marginRight:'10px'}} onClick={handleRejectClick} id='btnRechazar' className='btn btn-outline-danger'>Rechazar</button>
+                            <button className={styles.btnprincipal} onClick={handleAcceptClick} id='btnAceptar'>Aceptar</button>
+                        </div>
                     </div>
 
                 </div>

@@ -71,19 +71,34 @@ const Ventaspage = () => {
 
     // Aquí determinamos qué contenido renderizar
 
-
-    if (!vendedor) {
+    if (session?.user.idUsuario == 12) {
         return (
             <>
-                <div className="d-flex justify-content-center">
-                    <img src="/continuaturegistro.png" alt="Continuar registro" width={'30%'} height={'30%'} />
+        <div className='container container-fluid'>
+            <h1 className='text text-center'>Mis Ventas</h1>
+                <h4 className='text text-center'>En este apartado podra visualizar sus ventas</h4>
+
+
+                <div className='container container-sm'>
+                <Link href={'#'} className={styles.btnprincipal}>Agregar Tienda</Link>
                 </div>
-                <div className="d-flex justify-content-center">
-                    <h3 className="text text-center">Aún no tienes acceso a este contenido, presiona el siguiente botón para continuar:</h3>
+        </div>
+            </>
+        )
+        
+    }
+
+
+    if (vendedor === null) {
+        return (
+            <>
+                <div className='container-fluid' style={{ marginTop: '10rem', marginBottom: '10rem' }}>
+                    <div className='d-flex justify-content-center flex-row'>
+
+                        <Spinner animation="border" />
+                    </div>
                 </div>
-                <div className="d-flex justify-content-center my-5">
-                    <Link href={'/RegistroVendedor/DatosVendedor'} className={styles.btnprincipal} style={{ textDecoration: 'none' }}>Continuar Registro</Link>
-                </div>
+                );
             </>
         );
     }
@@ -117,6 +132,8 @@ const Ventaspage = () => {
             </div>
         );
     }
+
+    
 
     // Renderizado final basado en si existe un registro en ambas tablas
     return (

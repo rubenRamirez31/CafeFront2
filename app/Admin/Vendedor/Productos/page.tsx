@@ -69,6 +69,26 @@ const VendedorProductospage = () => {
 
 
     // Aquí determinamos qué contenido renderizar
+    if (session?.user.idUsuario == 12) {
+        return (
+            <>
+                <>
+                    <div className='container container-fluid'>
+                        <h1 className='text text-center'>Mis Productos</h1>
+                        <h4 className='text text-center'>En este apartado podra visualizar y administrar sus productos</h4>
+
+
+                        <div className={styles.contenedorDatosSolicitud}>
+                            <div className='d-flex justify-content-end my-5'>
+                                <Link href={'#'} className={styles.btnprincipal} style={{ textDecoration: 'none' }}>Agregar Producto</Link>
+                            </div >
+                        </div>
+                    </div>
+                </>
+            </>
+        )
+
+    }
 
 
     if (!vendedor) {
@@ -92,7 +112,7 @@ const VendedorProductospage = () => {
                     <h3 className="text text-center">Aún no tienes acceso a este contenido, presiona el siguiente botón para continuar:</h3>
                 </div>
                 <div className="d-flex justify-content-center my-5">
-                    <Link href={'/RegistroVendedor/DatosSolicitud'} className={styles.btnprincipal} style={{textDecoration:'none'}}>Continuar Solicitud</Link>
+                    <Link href={'/RegistroVendedor/DatosSolicitud'} className={styles.btnprincipal} style={{ textDecoration: 'none' }}>Continuar Solicitud</Link>
                 </div>
             </>
 
@@ -124,7 +144,7 @@ const VendedorProductospage = () => {
                         <h3 className="text text-center">Tu solicitud está pendiente, puedes consultar el estatus aquí:</h3>
                     </div>
                     <div className="d-flex justify-content-center my-5">
-                        <Link href={'/ruta-para-ver-estatus'} className={styles.btnprincipal} style={{textDecoration:'none'}} passHref>{solicitud.estatusSolicitud.estatus}</Link>
+                        <Link href={'/ruta-para-ver-estatus'} className={styles.btnprincipal} style={{ textDecoration: 'none' }} passHref>{solicitud.estatusSolicitud.estatus}</Link>
                     </div>
                 </>
             ) : (
