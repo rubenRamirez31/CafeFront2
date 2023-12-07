@@ -11,40 +11,70 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-
+import { ISolicitud } from "@/app/models/ISolicitud";
+import { IsAny } from "react-hook-form";
+import SolicitudCard from "@/app/components/SolicitudCard";
 
 export const SolicitudesPage = () => {
     const { data: session, status } = useSession();
-    //   const [productos, setProductos] = useState<IProducto[]>([]);
-    //   useEffect(() => {
+    const [error, setError] = useState('');
+    const [solicitud, setSolicitud] = useState<ISolicitud[]>([]);
 
-    //     if (session?.user.token) {
-    //       fetch('http://localhost:8080/Productos', {
-    //         method: 'GET',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //       })
-    //         .then(response => response.json())
-    //         .then(json => setProductos(json))
-    //         .catch(error => console.error('Error fetching products:', error));
-    //     }
+    useEffect(() => {
+        if (session?.user.token && session?.user.idUsuario) {
+            console.log("Iniciando solicitud fetch para obtener el las solicitudes");
+            fetch(`http://localhost:8080/solicitudes`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${session.user.token}`,
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        // Aquí manejamos el caso de error
+                        throw new Error('Error al buscar las solicitudes');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    setSolicitud(data);
 
+                })
+                .catch(err => {
+                    console.error("Error en la solicitud:", err);
+                    setError(err.message);
+                });
+        }
+    }, [session]);
 
-    //   }, [session]);
+    console.log(solicitud);
 
+    const verSolicitud = (idSolicitud: number) => {
+
+    }
 
     return (
         <>
-        <div className="d-flex justify-content-center text text-center">
-            <h1 className="font-weight-bold">Solicitudes</h1>
-        </div>
-        <div className="d-flex justify-content-center">
-            <p >Es este apartado podras ver las solicites de los vendedores</p>
-        </div>
-        <div className={styles.contenedorSolicitudes}>
-            <p>ok</p>
-        </div>
+            <div className="d-flex justify-content-center text text-center">
+                <h1 className="font-weight-bold">Solicitudes</h1>
+            </div>
+            <div className="d-flex justify-content-center">
+                <p >Es este apartado podras ver las solicites de los vendedores</p>
+            </div>
+                    <div className={styles.containertarjeta}>
+                        {
+                            solicitud.map((solicitud: ISolicitud) => (
+                                <SolicitudCard
+                                    key={solicitud.idSolicitud}
+                                    solicitud={solicitud}
+                                    verSolicitud={verSolicitud}
+
+                                />
+                            ))
+                        }
+            </div>
+
         </>
     );
 };
